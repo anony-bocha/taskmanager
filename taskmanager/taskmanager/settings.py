@@ -39,10 +39,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",  
     'rest_framework',
     'corsheaders',
-    'tasks',
+    'tasks',  # Your app containing Task model
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",   # MUST be at the top!
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -50,7 +51,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "taskmanager.urls"
@@ -120,12 +120,18 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-CORS_ALLOW_ALL_ORIGINS = True
 
+
+# CORS Settings for React + Django local development
+CORS_ALLOW_ALL_ORIGINS = True  # Allows all origins to access API (good for dev)
+
+
+# Django REST Framework settings including JWT auth
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
