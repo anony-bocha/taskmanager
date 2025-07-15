@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'tasks',  # Your app containing Task model
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -133,6 +134,8 @@ CORS_ALLOW_ALL_ORIGINS = True  # Allows all origins to access API (good for dev)
 
 # Django REST Framework settings including JWT auth
 REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,  # adjust as needed
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
